@@ -4,12 +4,8 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+Hello world(); My name is Kumar Amit Mehta. I’ve keen interest in hardware software co-operative architecture. Currently I work for a market leader in Storage systems. This site is about my personal rambling on various topics and do not represent my employer's perspective. 
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[gmate.amit@gmail.com](mailto:gmate.amit@gmail.com)
