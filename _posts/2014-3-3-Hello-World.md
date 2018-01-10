@@ -18,8 +18,7 @@ Language Support: C, C++, Python 3
 1. Download YCM package using [Vundle](https://github.com/VundleVim/Vundle.vim). If Vundle vim plugin is not already
 installed, install it first.
 
-2. (Skip next step if you need C language semantic support)
-
+2. Without C language semantic support
   * Installation
 ```
 mkdir ~/ycm_build
@@ -30,60 +29,62 @@ cmake --build . --target ycm_core
 
 2. With C language semantic support
   * Download the clang binary (clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04)
-  
+
   * Build/install prerequisites
-  ```
-  sudo pacman -Sy pkg-config
-  sudo pacman -Sy fakeroot
-  git clone https://aur.archlinux.org/package-query.git
-  cd package-query
-  makepkg -si
-  cd ..
-  git clone https://aur.archlinux.org/yaourt.git
-  cd yaourt
-  makepkg -si
-  cd ..
-  sudo pacman-key --refresh-key
-  gpg --keyserver pgp.mit.edu --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
-  gpg --keyserver keys.gnupg.net --recv-keys 702353E0F7E48EDB
-  yaourt -S ncurses5-compat-libs
-  ```
-  
+```
+sudo pacman -Sy pkg-config
+sudo pacman -Sy fakeroot
+git clone https://aur.archlinux.org/package-query.git
+cd package-query
+makepkg -si
+cd ..
+git clone https://aur.archlinux.org/yaourt.git
+cd yaourt
+makepkg -si
+cd ..
+sudo pacman-key --refresh-key
+gpg --keyserver pgp.mit.edu --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
+gpg --keyserver keys.gnupg.net --recv-keys 702353E0F7E48EDB
+yaourt -S ncurses5-compat-libs
+``` 
+
   * Build YCM with python 2 or 3 support
-  ```
-  mkdir ~/ycm_build
-  cd ~/ycm_build
-  ```
-  
-  * Python 2 support (Skip if you need YCM to support Python 3 along with C family languages
-    ```
-    cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-    ``` 
-  * Python 3 support
-   ```
-   cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/libpython3.6m.so -DUSE_PYTHON2=OFF . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
-   ```
-   
+```
+mkdir ~/ycm_build
+cd ~/ycm_build
+```
+
+    * Python 2 support (Skip if you need YCM to support Python 3 along with C family languages
+```
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+```
+
+    * Python 3 support
+```
+cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/libpython3.6m.so -DUSE_PYTHON2=OFF . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+```
+
   * Build YCM
-  ```
-  cmake --build . --target ycm_core
-  ```
-   
-   * Update .vimrc
-    * For python 2
-    ```   
-    let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
-    let g:ycm_python_binary_path = '/usr/bin/python2.7'
-    ```
- 
-    * For python 3
-   
-   ```   
+```
+cmake --build . --target ycm_core
+```
+
+3. Update .vimrc
+
+  * For python 2
+```
+let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
+let g:ycm_python_binary_path = '/usr/bin/python2.7'
+```
+
+  * For python 3
+
+```
    let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
    let g:ycm_python_binary_path = '/usr/bin/python3.6'
-   ```
-   
-   5.Use .ycm_extra_conf file (sample version is available uder ycm source directory) to make changes for C or C++ semantic completion. Put that edited file at the top of the C or C++ project directory.
+```
+
+4. Use .ycm_extra_conf file (sample version is available uder ycm source directory) to make changes for C or C++ semantic completion. Put that edited file at the top of the C or C++ project directory.
 
 ### Notes
 
