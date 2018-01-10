@@ -62,14 +62,14 @@ mkdir ~/ycm_build
 cd ~/ycm_build
 ```
 
-    * Python 2 support (Skip if you need YCM to support Python 3 along with C family languages
+  * Python 2 support (Skip if you need YCM to support Python 3 along with C family languages
 
 ```
 
 cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 ```
 
-    * Python 3 support
+  * Python 3 support
 ```
 
 cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/libpython3.6m.so -DUSE_PYTHON2=OFF . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
