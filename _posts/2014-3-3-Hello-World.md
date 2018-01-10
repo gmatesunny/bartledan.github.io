@@ -1,6 +1,6 @@
 ---
 layout: post
-title: YouCompleteMe is awesome, and so is Arch Linux (Pun intended)
+title: YCM is awesome, and so is Arch Linux (Pun intended)
 ---
 
 I love [Vim](http://www.vim.org/); It's simple, yet powerful. I think, Vim with few custom settings and plugins are quite efficient as IDEs (Integrated Development Environments). IDE's offer lot more features (Integrated Debuggers etc) but a lot of time, I do not need most of the features and in many of the cases, all I need is code completion, and syntax error highlighting support in Vim. [YouCompleteMe](http://valloric.github.io/YouCompleteMe/) is pefect for my needs and I found this gem few years back when I was still using [Syntastic](https://github.com/vim-syntastic/syntastic). At that time, I was using Fedora and setting up YouCompleteMe was not so difficult. Can't say the same for Arch Linux :(
