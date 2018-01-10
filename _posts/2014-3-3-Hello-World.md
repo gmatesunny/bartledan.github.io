@@ -1,5 +1,82 @@
 ---
 layout: post
-title: Genesis
+title: YouCompleteMe is awesome, and so is Arch Linux (Pun intended)
 ---
 
+I love [Vim](http://www.vim.org/); It's simple, yet powerful. I think, Vim with few custom settings and plugins are quite efficient as IDEs (Integrated Development Environments). IDE's offer lot more features (Integrated Debuggers etc) but a lot of time, I do not need most of the features and in many of the cases, all I need is code completion, and syntax error highlighting support in Vim. [YouCompleteMe](http://valloric.github.io/YouCompleteMe/) is pefect for my needs and I found this gem few years back when I was still using [Syntastic](https://github.com/vim-syntastic/syntastic). At that time, I was using Fedora and setting up YouCompleteMe was not so difficult. Can't say the same for Arch Linux :(
+
+I use a very minimal Arch Linux distribution and maybe because of that, I had to go extra mile to get things working. I needed YouCompleteMe support for C family language and Python 3 on a very minimal Arch Linux installation. What started as a 10 mins jaunt, ended up into around 8 hours of battle, but alas I raised my glass of water and was triumphant (Too bad, no one was recording this event and like many others, this will not go into history books). So for souls like mine, who dared to tread on this path and still lurk in deep forest, here's the gameplay :)
+
+### Environment: 
+Distribution: Arch Linux
+
+Vim Plugin: YCM (YouCompleteMe)
+
+Language Support: C, C++, Python 3
+
+### Steps
+1.Download YCM package using [Vundle](https://github.com/VundleVim/Vundle.vim). If Vundle vim plugin is not already
+installed, install it first.
+
+2A.(Skip next step if you need C language semantic support)
+
+   1.Installation
+    
+    mkdir ~/ycm_build
+    cd ~/ycm_build
+    cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+    cmake --build . --target ycm_core
+
+2B.With C language semantic support
+
+   1.Download the clang binary (clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04)
+   
+   2.Build/install prerequisites
+  
+    sudo pacman -Sy pkg-config
+    sudo pacman -Sy fakeroot
+    git clone https://aur.archlinux.org/package-query.git
+    cd package-query
+    makepkg -si
+    cd ..
+    git clone https://aur.archlinux.org/yaourt.git
+    cd yaourt
+    makepkg -si
+    cd ..
+    sudo pacman-key --refresh-key
+    gpg --keyserver pgp.mit.edu --recv-keys C52048C0C0748FEE227D47A2702353E0F7E48EDB
+    gpg --keyserver keys.gnupg.net --recv-keys 702353E0F7E48EDB
+    yaourt -S ncurses5-compat-libs
+    
+   3.Build YCM with python 2 or 3 support
+   
+   1.Python 2 support (Skip if you need YCM to support Python 3 along with C family languages
+    
+     mkdir ~/ycm_build
+     cd ~/ycm_build
+     cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu -ubuntu-16.04 . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+     cmake --build . --target ycm_core
+    
+   1.Python 3 support
+  
+    cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=/home/amit/ycm_temp/prebuilt/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/lib/libpython3.6m.so -DUSE_PYTHON2=OFF . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+
+   4.Update .vimrc
+   
+   1.For python 2
+    
+    let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
+    let g:ycm_python_binary_path = '/usr/bin/python2.7'
+
+   1.For python 3
+   
+    let g:ycm_server_python_interpreter = '/usr/bin/python3.6'
+    let g:ycm_python_binary_path = '/usr/bin/python3.6'
+
+   5: Use .ycm_extra_conf file (sample version is available uder ycm source directory) to make changes for C or C++ semantic completion. Put that edited file at the top of the C or C++ project directory.
+
+### Notes
+
+1.Python
+
+The code completion will work for the python version for which the YCM was built. Therefore, if YCM doesn't seem to work, check the YcmDebugInfo and the python version.
